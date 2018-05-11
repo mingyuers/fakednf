@@ -1,5 +1,5 @@
 # python:alpine is 3.{latest}
-FROM python:alpine 
+FROM tiangolo/uwsgi-nginx:python2.7
 
 LABEL maintainer="Jeeva S. Chelladhurai"
 
@@ -9,4 +9,8 @@ COPY src /src/
 
 EXPOSE 5000
 
-ENTRYPOINT ["python", "/src/app.py"]
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["/start.sh"]
+
+#ENTRYPOINT ["python", "/src/app.py"]
