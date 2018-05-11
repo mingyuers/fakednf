@@ -1,16 +1,16 @@
 # python:alpine is 3.{latest}
 FROM tiangolo/uwsgi-nginx:python2.7
 
-LABEL maintainer="Jeeva S. Chelladhurai"
-
 RUN pip install flask
 
 COPY src /src/
 
-EXPOSE 5000
+COPY fakednf.conf /etc/nginx/conf.d/
 
-ENTRYPOINT ["/entrypoint.sh"]
+RUN chmod +x /src/start.sh
 
-CMD ["/start.sh"]
+# ENTRYPOINT ["python", "/src/app.py"]
 
-#ENTRYPOINT ["python", "/src/app.py"]
+CMD ["bash","/src/start.sh"]
+
+# CMD ["nginx", "-g", "daemon off;"]
